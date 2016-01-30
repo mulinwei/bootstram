@@ -1,0 +1,82 @@
+@keyframes show {
+  0%{
+    transform: scale(0,0);
+    opacity: 0;
+  }
+  100%{
+    transform: scale(1,1);
+    opacity: 1;
+
+  }
+}
+@keyframes hide {
+  0%{
+    transform: scale(1,1);
+  }
+  100%{
+    transform: scale(0,0);
+    opacity: 0;
+  }
+}
+
+*[data-a=animate-hide]{
+  animation:hide 1s ease forwards ;
+  transform-origin: left top;
+}
+*[data-a=animate-show]{
+  animation:show 1s ease forwards ;
+  transform-origin: left top;
+}
+
+//圆周运动
+@r:20;
+@a:0;
+@p:10;
+@num:360/@p;
+.round(@i:0) when (@i<=@num){
+  @select:100/@num*@i*1%; //区分百分比
+  @a:@i*@p;               //旋转度数
+  @{select}{              //为百分比区间添值
+    transform: translate(cos(@a*pi()/180)*@r*1px,sin(@a*pi()/180)*@r*1px);
+  }
+  .round(@i+1);           //循环一百遍啊一百遍
+}
+@keyframes round {        //
+  .round();
+}
+*[data-a*=animate-round]{
+  animation: round 2s linear infinite;
+}
+
+//quxian运动
+@r:30;
+@r1:10;
+@a:0;
+@a1:0;
+@p:1;
+@num:360/@p;
+@p1:10;
+.quxian(@i:0) when (@i<=@num){
+  @select:100/@num*@i*1%;
+  @a:@i*@p;
+  @a1:@i*@p1;
+  @{select}{
+    transform: translate(cos(@a*pi()/180)*@r*1px,sin(@a1*pi()/180)*@r1*1px);
+  }
+  .quxian(@i+1);
+}
+@keyframes  quxian{
+  .quxian();
+}
+*[data-a*=animate-quxian]{
+  animation: quxian 2s linear infinite;
+}
+
+@keyframes  rotate{
+  0%{
+    transform: rotateZ(-360deg);
+  }
+}
+*[data-a*=animate-rotate]{
+  animation: rotate 2s linear infinite;
+}
